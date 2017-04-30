@@ -5,7 +5,7 @@ public with sharing class Mastodon_Status {
     public Mastodon_Account account;
     public Integer in_reply_to_id;
     public Integer in_reply_to_account_id;
-    public String reblog;
+    public Mastodon_Status reblog;
     public String content;
     public DateTime created_at;
     public Integer reblogs_count;

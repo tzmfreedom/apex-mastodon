@@ -9,7 +9,10 @@ public with sharing class Mastodon_Util {
         }
         List<String> queryValues = new List<String>{};
         for (String key : params.keySet()) {
-            queryValues.add(key + '=' + EncodingUtil.urlEncode(params.get(key), 'utf-8'));
+            if (params.get(key) != null) {
+                queryValues.add(
+                    key + '=' + EncodingUtil.urlEncode(String.valueOf(params.get(key)), 'utf-8'));
+            }
         }
         return String.join(queryvalues, '&');
     }

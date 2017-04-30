@@ -8,15 +8,15 @@ public with sharing class Mastodon_Status {
     public String reblog;
     public String content;
     public DateTime created_at;
-	public Integer reblogs_count;
-	public Integer favourites_count;
-	public Boolean reblogged;
-	public Boolean favourited;
-	public Boolean sensitive;
-	public String spoiler_text;
-	public String visibility;
-	public List<Mastodon_Attachment> media_attachments;
-	public List<Mastodon_Mention> mentions;
-	public List<Mastodon_Tag> tags;
-	public Mastodon_Application application; 
+    public Integer reblogs_count;
+    public Integer favourites_count;
+    public Boolean reblogged;
+    public Boolean favourited;
+    public Boolean sensitive;
+    public String spoiler_text;
+    public String visibility;
+    public List<Mastodon_Attachment> media_attachments;
+    public List<Mastodon_Mention> mentions;
+    public List<Mastodon_Tag> tags;
+    public Mastodon_Application application; 
 }

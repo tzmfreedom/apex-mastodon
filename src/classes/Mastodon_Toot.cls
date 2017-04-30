@@ -1,7 +1,3 @@
-/**
- * Created by mtajitsu on 2017/04/30.
- */
-
 public with sharing class Mastodon_Toot {
     private String status;
 
@@ -10,6 +6,6 @@ public with sharing class Mastodon_Toot {
     }
 
     public String toQueryString() {
-        return 'status=' + this.status;
+        return 'status=' + EncodingUtil.urlEncode(this.status, 'utf-8');
     }
 }

@@ -4,28 +4,36 @@ Apex Library for mastodon
 
 ## Install
 
+You can install with "Deploy to Salesforce" button
+
 <a href="https://githubsfdeploy.herokuapp.com?owner=tzmfreedom&repo=apex-mastodon">
   <img alt="Deploy to Salesforce" src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/deploy.png">
 </a>
 
-or use spm command
-
-```bash
-$ spm install https://github.com/tzmfreedom/apex-mastodon/src -u {USERNAME} -p {PASSWORD}
+If you can use [jsforce-deploy](https://github.com/jsforce/jsforce-metadata-tools) command, execute following command.
+```
+$ git clone https://github.com/tzmfreedom/apex-mastodon
+$ jsforce-deploy -D apex-mastodon/src -u {USERNAME} -p {PASSWORD}
 ```
 
 ## Usage
 
-### Use Named Credentials
+### Authorization
 
+You can authenticate with named credentials.
 ```apex
 Mastodon_Client client = new Mastodon_Client('callout:{named_credential_name}');
+```
+
+On OAuth2.0 based authorization(WIP)
+
+
+### Call API
+
+Post Status
+```apex
 Mastodon_Status result = client.postStatus(new Mastodon_Toot('hello mastodon'));
 ```
-### Use ClientID/ClientSecret/RedirectUri
-
-WIP
-
 
 ## Status of implementations
 

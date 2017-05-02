@@ -25,8 +25,19 @@ You can authenticate with named credentials.
 Mastodon_Client client = new Mastodon_Client('callout:{named_credential_name}');
 ```
 
-On OAuth2.0 based authorization(WIP)
+OAuth2.0 Password grant
+```apex
+Mastodon_Client c = new Mastodon_Client('https://{instance_host}', '{client_id}', '{client_secret}', '{redirect_uri}');
+c.authorizeByCredential('{username}', '{password}');
+```
 
+OAuth2.0 Authorization code grant
+```apex
+Mastodon_Client c = new Mastodon_Client('https://{instance_host}', '{client_id}', '{client_secret}', '{redirect_uri}');
+String authorizeUrl = c.getAuthorizeUrl('{scope}', '{state}');
+...
+c.authorizeByCode('{code}');
+```
 
 ### Call API
 

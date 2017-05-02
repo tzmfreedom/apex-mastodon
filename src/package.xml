@@ -4,11 +4,11 @@
         <members>Mastodon_Account</members>
         <members>Mastodon_Application</members>
         <members>Mastodon_Attachment</members>
-        <members>Mastodon_Authentication</members>
         <members>Mastodon_Card</members>
         <members>Mastodon_Client</members>
         <members>Mastodon_Context</members>
         <members>Mastodon_Error</members>
+        <members>Mastodon_Exception</members>
         <members>Mastodon_Instance</members>
         <members>Mastodon_Mention</members>
         <members>Mastodon_Notification</members>

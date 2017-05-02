@@ -21,7 +21,7 @@ public with sharing class Mastodon_Toot {
         }
         if (this.media_ids != null) {
             for (Integer media_id : media_ids) {
-                params.add('media_ids[]=' + media_id);	
+                params.add('media_ids[]=' + media_id);    
             }
         }
         if (this.spoiler_text != null) {

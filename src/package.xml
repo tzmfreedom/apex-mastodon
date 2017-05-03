@@ -19,7 +19,7 @@
         <members>Mastodon_Range</members>
         <members>Mastodon_Relationship</members>
         <members>Mastodon_Report</members>
-        <members>Mastodon_ReportResponse</members>
+        <members>Mastodon_ReportRequest</members>
         <members>Mastodon_Results</members>
         <members>Mastodon_Status</members>
         <members>Mastodon_Tag</members>

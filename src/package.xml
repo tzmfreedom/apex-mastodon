@@ -2,6 +2,7 @@
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
         <members>Mastodon_Account</members>
+        <members>Mastodon_AppConfig</members>
         <members>Mastodon_Application</members>
         <members>Mastodon_Attachment</members>
         <members>Mastodon_Card</members>
@@ -12,9 +13,13 @@
         <members>Mastodon_Instance</members>
         <members>Mastodon_Mention</members>
         <members>Mastodon_Notification</members>
+        <members>Mastodon_OAuthApplication</members>
+        <members>Mastodon_Profile</members>
+        <members>Mastodon_QueryableParameter</members>
         <members>Mastodon_Range</members>
         <members>Mastodon_Relationship</members>
         <members>Mastodon_Report</members>
+        <members>Mastodon_ReportResponse</members>
         <members>Mastodon_Results</members>
         <members>Mastodon_Status</members>
         <members>Mastodon_Tag</members>
@@ -22,5 +27,5 @@
         <members>Mastodon_Util</members>
         <name>ApexClass</name>
     </types>
-    <version>39.0</version>
+    <version>36.0</version>
 </Package>

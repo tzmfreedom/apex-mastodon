@@ -1,7 +1,3 @@
-/**
- * Created by mtajitsu on 2017/04/30.
- */
-
 public with sharing class Mastodon_Util {
     public static String convertToQueryString(Map<String, String> params) {
         if (params == NULL || params.isEmpty()) {

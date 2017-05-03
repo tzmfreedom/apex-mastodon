@@ -1,19 +1,26 @@
-public with sharing class Mastodon_Range {
-    public Integer max_id;
-    public Integer since_id;
-    public Integer limit_no;
-    
-    public String toQueryString() {
-        Map<String, String> params = new Map<String, String>();
-        if (this.max_id != null) {
-            params.put('max_id', String.valueOf(this.max_id));
-        }
-        if (this.since_id != null) {
-            params.put('max_id', String.valueOf(this.since_id));
-        }
-        if (this.limit_no != null) {
-            params.put('max_id', String.valueOf(this.limit_no));
-        }
-        return Mastodon_Util.convertToQueryString(params);
-    }
+public with sharing class Mastodon_Range extends Mastodon_QueryableParameter {
+    public Integer maxId;
+    public Integer sinceId;
+    public Integer limitNo;
+    public Boolean isLocal;
+    public Boolean isExcludeReplies;
+    public Boolean isOnlyMedia;
+
+    protected override Map<String, Object> getParams() {
+   		Map<String, Object> params = new Map<String, Object> {
+   			'max_id' => this.maxId,
+   			'since_id' => this.sinceId,
+   			'limit' => this.limitNo
+   		};
+   		if (this.isLocal != null && this.isLocal) {
+   			params.put('local', 'true');
+   		}
+   		if (this.isExcludeReplies != null && this.isExcludeReplies) {
+   			params.put('exclude_replies', 'true');
+   		}
+   		if (this.isOnlyMedia != null && this.isOnlyMedia) {
+   			params.put('only_media', 'true');
+   		}
+   		return params;
+   	}
 }

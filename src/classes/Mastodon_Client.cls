@@ -81,9 +81,8 @@ public with sharing class Mastodon_Client {
         return (Mastodon_Account)JSON.deserialize(res.getBody(), Mastodon_Account.class);
     }
 
-    // Todo: form parameter
-    public Mastodon_Account updateCurrentUser(Integer id) {
-        HTTPResponse res = this.call('PATH', BASE_PATH + '/accounts/update_credentials', '');    
+    public Mastodon_Account updateCurrentUser(Mastodon_Profile profile) {
+        HTTPResponse res = this.call('POST', BASE_PATH + '/accounts/update_credentials', '_method=PATCH&' + profile.toQueryString());
         return (Mastodon_Account)JSON.deserialize(res.getBody(), Mastodon_Account.class);
     }
     
@@ -96,6 +95,7 @@ public with sharing class Mastodon_Client {
         HTTPResponse res = this.call('GET', BASE_PATH + '/accounts/' + id + '/following', range.toQueryString());    
         return (List<Mastodon_Account>)JSON.deserialize(res.getBody(), List<Mastodon_Account>.class);
     }
+    
     // Todo: range parameter 
     public List<Mastodon_Status> getStatuses(Integer id) {
         HTTPResponse res = this.call('GET', BASE_PATH + '/accounts/' + id + '/statuses', null);    
@@ -153,10 +153,9 @@ public with sharing class Mastodon_Client {
         return (List<Mastodon_Account>)JSON.deserialize(res.getBody(), List<Mastodon_Account>.class);
     }
    
-    // Todo: parameter 
-    public Mastodon_Application registerApplication() {
-        HTTPResponse res = this.call('POST', BASE_PATH + '/apps', null);    
-        return (Mastodon_Application) JSON.deserialize(res.getBody(), Mastodon_Application.class);
+    public Mastodon_OAuthApplication registerApplication(Mastodon_AppConfig config) {
+        HTTPResponse res = this.call('POST', BASE_PATH + '/apps', config.toQueryString());
+        return (Mastodon_OAuthApplication) JSON.deserialize(res.getBody(), Mastodon_OAuthApplication.class);
     }
     
     public List<Mastodon_Account> getBlocks(Mastodon_Range range) {
@@ -194,8 +193,8 @@ public with sharing class Mastodon_Client {
     }
 
     // Todo: file data
-    public Mastodon_Attachment uploadMedia() {
-        HTTPResponse res = this.call('POST', BASE_PATH + '/media', null);
+    public Mastodon_Attachment uploadMedia(String base64EncodedFile) {
+        HTTPResponse res = this.call('POST', BASE_PATH + '/media', 'file=' + base64EncodedFile);
         return (Mastodon_Attachment) JSON.deserialize(res.getBody(), Mastodon_Attachment.class);
     }
     
@@ -223,16 +222,18 @@ public with sharing class Mastodon_Client {
         return (List<Mastodon_Report>) JSON.deserialize(res.getBody(), List<Mastodon_Report>.class);
     }
 
-    // Todo: parameters
-    public List<Mastodon_Report> reportUser() {
-        HTTPResponse res = this.call('POST', BASE_PATH + '/reports', null);
-        return (List<Mastodon_Report>) JSON.deserialize(res.getBody(), List<Mastodon_Report>.class);
+    public Mastodon_Report reportUser(Mastodon_ReportRequest request) {
+        HTTPResponse res = this.call('POST', BASE_PATH + '/reports', request.toQueryString());
+        return (Mastodon_Report) JSON.deserialize(res.getBody(), Mastodon_Report.class);
     }
     
-    // Todo
-    public List<Mastodon_Results> searchContent(String q, String resolve) {
-        HTTPResponse res = this.call('GET', BASE_PATH + '/reports', null);
-        return (List<Mastodon_Results>) JSON.deserialize(res.getBody(), List<Mastodon_Results>.class);
+    public Mastodon_Results searchContent(String q, Boolean resolve) {
+    	String queryString = Mastodon_Util.convertToQueryString(new Map<String, String> { 
+    		'q' => q ,
+    		'resolve' => String.valueOf(resolve)
+    	});
+        HTTPResponse res = this.call('GET', BASE_PATH + '/search?' + queryString, null);
+        return (Mastodon_Results) JSON.deserialize(res.getBody(), Mastodon_Results.class);
     }
     
     public Mastodon_Status getStatus(Integer id) {
@@ -260,7 +261,6 @@ public with sharing class Mastodon_Client {
         return (List<Mastodon_Account>) JSON.deserialize(res.getBody(), List<Mastodon_Account>.class);
     }
     
-    // Todo
     public Mastodon_Status postStatus(Mastodon_Toot toot) {
         HTTPResponse res = this.call('POST', BASE_PATH + '/statuses', toot.toQueryString());
         return (Mastodon_Status)JSON.deserialize(res.getBody(), Mastodon_Status.class);
@@ -296,7 +296,7 @@ public with sharing class Mastodon_Client {
     }
     
     public List<Mastodon_Status> retrieveTimelineByTag(String hashtag, Mastodon_Range range) {
-        HTTPResponse res = this.call('GET', BASE_PATH + '/timelines/tag' + hashtag, range.toQueryString());
+        HTTPResponse res = this.call('GET', BASE_PATH + '/timelines/tag/' + hashtag, range.toQueryString());
         return (List<Mastodon_Status>) JSON.deserialize(res.getBody(), List<Mastodon_Status>.class);
     }
 
@@ -311,6 +311,7 @@ public with sharing class Mastodon_Client {
             req.setBody(body);
         }
         Http http = new Http();
-        return http.send(req);
+        HTTPResponse res = http.send(req);
+        return res;
     }
 }

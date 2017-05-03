@@ -10,9 +10,14 @@ $ git clone https://github.com/tzmfreedom/apex-mastodon
 $ jsforce-deploy -D apex-mastodon/src -u {USERNAME} -p {PASSWORD}
 ```
 
-For spm user
+For [spm](https://github.com/tzmfreedom/spm) user
 ```
 $ spm install tzmfreedom/apex-mastodon/src -u {username} -p {password}
+```
+
+For docker user
+```bash
+$ docker run --rm tzmfree/spm install tzmfreedom/apex-mastodon/src -u {username} -p {password}
 ```
 
 ## Usage
@@ -26,16 +31,16 @@ Mastodon_Client client = new Mastodon_Client('callout:{named_credential_name}');
 
 Resource Owner Password Credentials Grant
 ```apex
-Mastodon_Client c = new Mastodon_Client('https://{instance_host}', '{client_id}', '{client_secret}', '{redirect_uri}');
-c.authorizeByCredential('{username}', '{password}');
+Mastodon_Client client = new Mastodon_Client('https://{instance_host}', '{client_id}', '{client_secret}', '{redirect_uri}');
+client.authorizeByCredential('{username}', '{password}');
 ```
 
 Authorization Code Grant
 ```apex
-Mastodon_Client c = new Mastodon_Client('https://{instance_host}', '{client_id}', '{client_secret}', '{redirect_uri}');
-String authorizeUrl = c.getAuthorizeUrl('{scope}', '{state}');
+Mastodon_Client client = new Mastodon_Client('https://{instance_host}', '{client_id}', '{client_secret}', '{redirect_uri}');
+String authorizeUrl = client.getAuthorizeUrl('{scope}', '{state}');
 ...
-c.authorizeByCode('{code}');
+client.authorizeByCode('{code}');
 ```
 
 ### Call API
